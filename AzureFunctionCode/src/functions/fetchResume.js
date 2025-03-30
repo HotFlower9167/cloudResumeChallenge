@@ -20,10 +20,10 @@ app.http('fetchResume', {
 
         if (resumeID) {
             context.log('Fetching the resume requested');
-            const container = dbClient.database(databaseId).container(containerId);
-            const fetchResumeResponse = await container.item(resumeID).read();
+            const fetchResumeResponse = await dbClient.database(databaseId).container(containerId).item(resumeID, resumeID).read();
             //const testfetch = await container.item(resumeID).ItemResponse;
             context.log(fetchResumeResponse.item.clientContext.clientConfig.sDKVersion)
+            context.log(fetchResumeResponse.resource)
             if (fetchResumeResponse.statusCode === 404) {
                 context.log('Resume not found');
                 return { body: `Resume with ID ${resumeID} not found` }
