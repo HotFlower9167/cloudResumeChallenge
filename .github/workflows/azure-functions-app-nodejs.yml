@@ -31,7 +31,10 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest # For Linux, use ubuntu-latest
+    runs-on: ubuntu-latest
+    permissions:
+          id-token: write # Required for OIDC
+          contents: read # Required for actions/checkout# For Linux, use ubuntu-latest
     environment: dev
     steps:
     - name: 'Checkout GitHub Action'
